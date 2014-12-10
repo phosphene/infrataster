@@ -9,7 +9,7 @@ module Infrataster
       attr_reader :uri, :options
 
       def initialize(url_str, options = {})
-        @options = {params: {}, method: :get, headers: {}}.merge(options)
+        @options = {params: {}, method: :get, headers: {}, body: ''}.merge(options)
         @uri = URI.parse(url_str)
         if @uri.scheme
           unless %w!http https!.include?(@uri.scheme)
@@ -35,6 +35,10 @@ module Infrataster
         end
 
         @options[:method]
+      end
+
+      def body
+        @options[:body]
       end
 
       def headers
